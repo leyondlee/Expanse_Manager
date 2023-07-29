@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Expense Manager</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="node_modules/bootstrap-table/dist/bootstrap-table.min.css" />
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.min.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="transactions.html">Transactions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.html">Categories</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br>
+
+    <div class="container-fluid">
+        <table id="transaction-table"></table>
+    </div>
+
+    <div id="transaction-table-toolbar">
+        <button type="button" class="btn btn-secondary" title="Add Transaction" id="add-transaction"><i
+                class="bi bi-plus"></i></button>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="transaction-modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="transaction-form" onsubmit="return false;">
+                        <fieldset>
+                            <div class="mb-3">
+                                <label for="transaction-form-datetime" class="form-label">Date/Time</label>
+                                <input type="datetime-local" class="form-control" id="transaction-form-datetime">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="transaction-form-category-type" class="form-label">Category</label>
+                                <div id="transaction-form-category-type">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio"
+                                            name="transaction-form-category-type" id="transaction-form-expense"
+                                            value="expense">
+                                        <label class="form-check-label" for="transaction-form-expense">Expense</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio"
+                                            name="transaction-form-category-type" id="transaction-form-income"
+                                            value="income">
+                                        <label class="form-check-label" for="transaction-form-income">Income</label>
+                                    </div>
+                                </div>
+
+                                <select class="form-select" aria-label="Select Category"
+                                    id="transaction-form-category-name">
+                                    <option selected disabled></option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="transaction-form-amount" class="form-label">Amount</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="transaction-form-amount" min="0"
+                                        value="0.00" step=".01">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="transaction-form-description" class="form-label">Description</label>
+                                <textarea class="form-control" id="transaction-form-description" rows="3"></textarea>
+                            </div>
+                        </fieldset>
+                    </form>
+
+                    <div class="text-center">
+                        <button class="btn btn-light btn-sm" id="transaction-form-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" id="transaction-modal-submit"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="node_modules/bootstrap-show-toast/src/bootstrap-show-toast.js"></script>
+    <script src="node_modules/moment/min/moment.min.js"></script>
+    <script src="dist/renderer/utils.js"></script>
+    <script src="dist/renderer/transactions.js"></script>
+</body>
+
+</html>
