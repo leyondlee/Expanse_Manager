@@ -1,8 +1,12 @@
 // @ts-nocheck
 
-var overallChart = $("#overallChart");
-var expenseChart = $("#expenseChart");
-var incomeChart = $("#incomeChart");
+var transactionsChartCanvas = $("#transactionsChart");
+var expensesChartCanvas = $("#expensesChart");
+var incomesChartCanvas = $("#incomesChart");
+
+var transactionsChart = null;
+var expensesChart = null;
+var incomesChart = null;
 
 async function getTransactions() {
     var transactions = await window.api.getTransactions();
@@ -49,21 +53,23 @@ async function createCharts() {
         }
     }
 
-    const options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Transactions',
-            },
-            legend: {
-                display: false
+    const getOptions = (title: string) => {
+        return {
+            // responsive: true,
+            // maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: title,
+                },
+                legend: {
+                    display: false
+                }
             }
-        }
+        };
     };
 
-    new Chart(overallChart, {
+    transactionsChart = new Chart(transactionsChartCanvas, {
         type: "doughnut",
         data: {
             labels: [
@@ -80,7 +86,7 @@ async function createCharts() {
                 hoverOffset: 4
             }]
         },
-        options: options
+        options: getOptions("Transactions")
     });
 
     var expenseChartLabels: string[] = [];
@@ -90,7 +96,7 @@ async function createCharts() {
         expenseChartData.push(value);
     });
 
-    new Chart(expenseChart, {
+    expensesChart = new Chart(expensesChartCanvas, {
         type: "doughnut",
         data: {
             labels: expenseChartLabels,
@@ -100,7 +106,7 @@ async function createCharts() {
                 hoverOffset: 4
             }]
         },
-        options: options
+        options: getOptions("Expenses")
     });
 
     var incomeChartLabels: string[] = [];
@@ -110,7 +116,7 @@ async function createCharts() {
         incomeChartData.push(value);
     });
 
-    new Chart(incomeChart, {
+    incomesChart = new Chart(incomesChartCanvas, {
         type: "doughnut",
         data: {
             labels: incomeChartLabels,
@@ -120,12 +126,14 @@ async function createCharts() {
                 hoverOffset: 4
             }]
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: options
-        }
+        options: getOptions("Incomes")
     });
 }
 
 createCharts();
+
+$(window).on("resize", () => {
+    transactionsChart.resize();
+    expensesChart.resize();
+    incomesChart.resize();
+});
