@@ -27,7 +27,7 @@ function capitalizeFirstLetterFormatter(value, row, index, field) {
 }
 
 function convertToDp(num: number, dp: number) {
-    return parseFloat(num).toFixed(dp);
+    return parseFloat(num.toFixed(dp));
 }
 
 function typeBadgeFormatter(value, row, index, field) {
@@ -36,7 +36,7 @@ function typeBadgeFormatter(value, row, index, field) {
         case "expense":
             color = "warning";
             break;
-            
+
         case "income":
             color = "info";
             break;

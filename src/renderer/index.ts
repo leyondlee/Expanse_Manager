@@ -78,11 +78,7 @@ async function createCharts() {
             ],
             datasets: [{
                 label: 'Amount ($)',
-                data: [expenseAmount, incomeAmount],
-                backgroundColor: [
-                    'rgb(255, 193, 7)',
-                    'rgb(13, 202, 240)'
-                ],
+                data: [convertToDp(expenseAmount, 2), convertToDp(incomeAmount, 2)],
                 hoverOffset: 4
             }]
         },
@@ -93,7 +89,7 @@ async function createCharts() {
     var expenseChartData: number[] = [];
     Object.entries(expenseCategories).forEach(([key, value]) => {
         expenseChartLabels.push(capitalizeFirstLetter(key));
-        expenseChartData.push(value);
+        expenseChartData.push(convertToDp(value, 2));
     });
 
     expensesChart = new Chart(expensesChartCanvas, {
@@ -113,7 +109,7 @@ async function createCharts() {
     var incomeChartData: number[] = [];
     Object.entries(incomeCategories).forEach(([key, value]) => {
         incomeChartLabels.push(capitalizeFirstLetter(key));
-        incomeChartData.push(value);
+        incomeChartData.push(convertToDp(value, 2));
     });
 
     incomesChart = new Chart(incomesChartCanvas, {
