@@ -26,7 +26,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.html">Overview</a>
                     </li>
@@ -37,6 +37,10 @@
                         <a class="nav-link" href="categories.html">Categories</a>
                     </li>
                 </ul>
+
+                <div>
+                    <span class="badge bg-primary">Balance: <span id="balance"></span></span>
+                </div>
             </div>
         </div>
     </nav>
@@ -46,15 +50,30 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-4">
-                <canvas class="chart" id="transactionsChart"></canvas>
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Transactions</h5>
+                        <canvas class="chart" id="transactionsChart"></canvas>
+                    </div>
+                </div>
             </div>
 
             <div class="col-4">
-                <canvas class="chart" id="expensesChart"></canvas>
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Expenses</h5>
+                        <canvas class="chart" id="expensesChart"></canvas>
+                    </div>
+                </div>
             </div>
 
             <div class="col-4">
-                <canvas class="chart" id="incomesChart"></canvas>
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Incomes</h5>
+                        <canvas class="chart" id="incomesChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -64,6 +83,7 @@
     <script src="node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
     <script src="node_modules/chart.js/dist/chart.umd.js"></script>
     <script src="dist/renderer/utils.js"></script>
+    <script src="dist/renderer/common.js"></script>
     <script src="dist/renderer/index.js"></script>
 </body>
 

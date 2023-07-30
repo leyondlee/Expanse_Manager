@@ -16,9 +16,16 @@ var transactionTableToolbar = $("#transaction-table-toolbar");
 var addTransactionButton = $("#add-transaction");
 
 async function setTransactionTableData(params: any) {
+    var total: number = await window.api.getTotalTransactions(params.data);
+    var rows: Array<any> = await window.api.getTransactions(params.data);
+    if (total === undefined || rows === undefined) {
+        showError("Something went wrong");
+        return;
+    }
+
     params.success({
-        total: await window.api.getTotalTransactions(params.data),
-        rows: await window.api.getTransactions(params.data),
+        total: total,
+        rows: rows,
     });
 }
 
@@ -31,6 +38,8 @@ async function addTransaction(datetime: number, categoryId: number, amount: numb
 
         transactionModal.modal("hide");
         transactionTable.bootstrapTable("refresh");
+
+        setBalance();
 
         return;
     }
@@ -87,6 +96,11 @@ async function showTransactionModal(data: any) {
     transactionFormCategoryNameSelect.find("option").not(":first").remove();
 
     var categoriesRows = await window.api.getCategories();
+    if (categoriesRows === undefined) {
+        showError("Something went wrong");
+        return;
+    }
+
     if (categoriesRows.length <= 0) {
         showError("No categories found");
     }
@@ -282,7 +296,7 @@ transactionTable.bootstrapTable({
         title: "Amount",
         sortable: true,
         formatter: (value, row, index, field) => {
-            return `$${convertToDp(value, 2)}`;
+            return `$${convertToDp(value, 2).toFixed(2)}`;
         }
     }, {
         field: "description",

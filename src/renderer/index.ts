@@ -59,7 +59,7 @@ async function createCharts() {
             // maintainAspectRatio: false,
             plugins: {
                 title: {
-                    display: true,
+                    display: false,
                     text: title,
                 },
                 legend: {
@@ -127,9 +127,3 @@ async function createCharts() {
 }
 
 createCharts();
-
-$(window).on("resize", () => {
-    transactionsChart.resize();
-    expensesChart.resize();
-    incomesChart.resize();
-});

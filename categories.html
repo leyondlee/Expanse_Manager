@@ -18,7 +18,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Overview</a>
                     </li>
@@ -29,6 +29,10 @@
                         <a class="nav-link active" aria-current="page" href="categories.html">Categories</a>
                     </li>
                 </ul>
+
+                <div>
+                    <span class="badge bg-primary">Balance: <span id="balance"></span></span>
+                </div>
             </div>
         </div>
     </nav>
@@ -86,6 +90,7 @@
     <script src="node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
     <script src="node_modules/bootstrap-show-toast/src/bootstrap-show-toast.js"></script>
     <script src="dist/renderer/utils.js"></script>
+    <script src="dist/renderer/common.js"></script>
     <script src="dist/renderer/categories.js"></script>
 </body>
 

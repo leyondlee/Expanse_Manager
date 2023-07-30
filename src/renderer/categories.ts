@@ -13,6 +13,11 @@ var addCategoryButton = $("#add-category");
 
 async function setCategoryTableData(params: any) {
     var res = await window.api.getCategories(params.data);
+    if (res === undefined) {
+        showError("Something went wrong");
+        return;
+    }
+
     params.success(res);
 }
 

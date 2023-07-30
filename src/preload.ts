@@ -1,6 +1,7 @@
 import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("api", {
+    getBalance: () => ipcRenderer.invoke("getBalance"),
     getTotalTransactions: (args: any) => ipcRenderer.invoke("getTotalTransactions", args),
     getTransactions: (args: any) => ipcRenderer.invoke("getTransactions", args),
     addTransaction: (datetime: number, categoryId: number, amount: number, description: string) => ipcRenderer.invoke("addTransaction", datetime, categoryId, amount, description),

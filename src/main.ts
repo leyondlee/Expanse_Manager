@@ -53,6 +53,30 @@ app.whenReady().then(() => {
 	const db = new BetterSqlite3(databaseFilename);
 	createTables(db);
 
+	ipcMain.handle("getBalance", (event) => {
+		try {
+			const stmt = db.prepare("\
+			SELECT (\
+				SELECT SUM(amount)\
+				FROM Transactions\
+				WHERE category_id IN (SELECT id FROM Categories WHERE type == 'income')\
+			) - (\
+				SELECT SUM(amount)\
+				FROM Transactions\
+				WHERE category_id IN (SELECT id FROM Categories WHERE type == 'expense')\
+			) AS balance");
+			const row: any = stmt.get();
+
+			if (row !== undefined) {
+				return row.balance;
+			}
+		} catch (error) {
+			console.log(error);
+		}
+
+		return undefined;
+	});
+
 	ipcMain.handle("getTotalTransactions", (event, args) => {
 		if (args === undefined) {
 			args = {};
@@ -154,7 +178,6 @@ app.whenReady().then(() => {
 			sql = `${sql} LIMIT ${limit} OFFSET ${offset}`;
 		}
 
-		var transactions: Array<any> = [];
 		var rows: any;
 		try {
 			const stmt = db.prepare(sql);
@@ -164,6 +187,7 @@ app.whenReady().then(() => {
 			return undefined;
 		}
 
+		var transactions: Array<any> = [];
 		for (var i: number = 0; i < rows.length; i += 1) {
 			var row: any = rows[i];
 
@@ -300,7 +324,6 @@ app.whenReady().then(() => {
 			sql = `${sql} LIMIT ${limit} OFFSET ${offset}`;
 		}
 
-		var categories: Array<any> = [];
 		var rows: Array<any>;
 		try {
 			const stmt = db.prepare(sql);
@@ -310,6 +333,7 @@ app.whenReady().then(() => {
 			return undefined;
 		}
 
+		var categories: Array<any> = [];
 		for (var i: number = 0; i < rows.length; i += 1) {
 			var row: any = rows[i];
 
