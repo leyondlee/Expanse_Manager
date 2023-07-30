@@ -31,15 +31,18 @@ function convertToDp(num: number, dp: number) {
 }
 
 function typeBadgeFormatter(value, row, index, field) {
-    var valueLower: string = value.toLowerCase();
-
     var color: string;
-    if (valueLower == "income") {
-        color = "info";
-    } else if (valueLower == "expense") {
-        color = "warning";
-    } else {
-        return value;
+    switch (value.toLowerCase()) {
+        case "expense":
+            color = "warning";
+            break;
+            
+        case "income":
+            color = "info";
+            break;
+
+        default:
+            return value;
     }
 
     return `<span class="badge text-bg-${color}">${capitalizeFirstLetter(value)}</span>`;

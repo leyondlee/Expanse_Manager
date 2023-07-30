@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="node_modules/bootstrap-table/dist/bootstrap-table.min.css" />
     <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.min.css" />
+
+    <style>
+        .chart {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,9 +41,30 @@
         </div>
     </nav>
 
+    <br>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+                <canvas class="chart" id="overallChart"></canvas>
+            </div>
+
+            <div class="col-4">
+                <canvas class="chart" id="expenseChart"></canvas>
+            </div>
+
+            <div class="col-4">
+                <canvas class="chart" id="incomeChart"></canvas>
+            </div>
+        </div>
+    </div>
+
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="node_modules/chart.js/dist/chart.umd.js"></script>
+    <script src="dist/renderer/utils.js"></script>
+    <script src="dist/renderer/index.js"></script>
 </body>
 
 </html>

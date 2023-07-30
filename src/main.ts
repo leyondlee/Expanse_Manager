@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import * as BetterSqlite3 from "better-sqlite3";
 
-var path = require('path');
+var path = require("path");
 
 function createWindow() {
 	const win = new BrowserWindow({
@@ -9,17 +9,17 @@ function createWindow() {
 		height: 600,
 		//autoHideMenuBar: true,
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js')
+			preload: path.join(__dirname, "preload.js")
 		}
 	});
 
-	win.loadFile('index.html');
+	win.loadFile("index.html");
 	//win.webContents.openDevTools();
 }
 
 function getDatabasePath() {
 	var folder: string = app.getPath("userData");
-	return path.join(folder, 'database.sqlite');
+	return path.join(folder, "database.sqlite");
 }
 
 function createTables(db: BetterSqlite3.Database) {
@@ -44,8 +44,8 @@ function createTables(db: BetterSqlite3.Database) {
 		)").run();
 }
 
-app.on('window-all-closed', () => {
-	if (process.platform !== 'darwin') app.quit();
+app.on("window-all-closed", () => {
+	if (process.platform !== "darwin") app.quit();
 });
 
 app.whenReady().then(() => {
