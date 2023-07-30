@@ -311,10 +311,10 @@ transactionTable.bootstrapTable({
         formatter: (value, row, index, field) => {
             return [
                 "<div class='btn-group' role='group'>",
-                "<button type='button' class='btn btn-light btn-sm edit'>",
+                "<button type='button' class='btn btn-light btn-sm edit' title='Edit'>",
                 "<i class='bi bi-pencil-square'></i>",
                 "</button>",
-                "<button type='button' class='btn btn-light btn-sm delete'>",
+                "<button type='button' class='btn btn-light btn-sm delete' title='Delete'>",
                 "<i class='bi bi-trash'></i>",
                 "</button>",
                 "</div>"
