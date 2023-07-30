@@ -12,5 +12,6 @@ contextBridge.exposeInMainWorld("api", {
     addCategory: (name: string, type: string) => ipcRenderer.invoke("addCategory", name, type),
     editCategory: (id: number, name: string, type: string) => ipcRenderer.invoke("editCategory", id, name, type),
     //getCategory: (id: number) => ipcRenderer.invoke("getCategory", id),
-    deleteCategory: (id: number) => ipcRenderer.invoke("deleteCategory", id)
+    deleteCategory: (id: number) => ipcRenderer.invoke("deleteCategory", id),
+    getAmountPerCategory: () => ipcRenderer.invoke("getAmountPerCategory")
 });

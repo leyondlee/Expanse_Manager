@@ -8,34 +8,31 @@ var transactionsChart = null;
 var expensesChart = null;
 var incomesChart = null;
 
-async function getTransactions() {
-    var transactions = await window.api.getTransactions();
-
-    return new Promise((resolve, reject) => {
-        resolve(transactions);
-    });
-}
-
 async function createCharts() {
-    var transactions: Array<any> = await getTransactions();
+    var res: Array<any> = await window.api.getAmountPerCategory();
+    if (res === undefined) {
+        showError("Something went wrong");
+        return;
+    }
 
     var expenseAmount: number = 0;
     var expenseCategories = {};
     var incomeAmount: number = 0;
     var incomeCategories = {};
-    for (var i = 0; i < transactions.length; i += 1) {
-        var transaction = transactions[i];
-        var amount: number = transaction.amount;
-        var categoryName: string = transaction.category_name.toLowerCase();
+    for (var i = 0; i < res.length; i += 1) {
+        var data = res[i];
+        var name: string = data.name.toLowerCase();
+        var type: string = data.type.toLowerCase();
+        var amount: number = data.amount;
 
-        switch (transaction.category_type.toLowerCase()) {
+        switch (type) {
             case "expense":
                 expenseAmount += amount;
 
-                if (categoryName in expenseCategories) {
-                    expenseCategories[categoryName] += amount;
+                if (name in expenseCategories) {
+                    expenseCategories[name] += amount;
                 } else {
-                    expenseCategories[categoryName] = amount;
+                    expenseCategories[name] = amount;
                 }
 
                 break;
@@ -43,10 +40,10 @@ async function createCharts() {
             case "income":
                 incomeAmount += amount;
 
-                if (categoryName in incomeCategories) {
-                    incomeCategories[categoryName] += amount;
+                if (name in incomeCategories) {
+                    incomeCategories[name] += amount;
                 } else {
-                    incomeCategories[categoryName] = amount;
+                    incomeCategories[name] = amount;
                 }
 
                 break;

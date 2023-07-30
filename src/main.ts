@@ -383,6 +383,33 @@ app.whenReady().then(() => {
 		return true;
 	});
 
+	ipcMain.handle("getAmountPerCategory", (event) => {
+		var rows: Array<any>;
+		try {
+			const stmt = db.prepare("\
+			SELECT Categories.name AS name, Categories.type AS type, SUM(Transactions.amount) as amount\
+			FROM Categories JOIN Transactions ON Categories.id = Transactions.category_id\
+			GROUP BY Categories.name, Categories.type");
+			rows = stmt.all();
+		} catch (error) {
+			console.log(error);
+			return undefined;
+		}
+
+		var res: Array<any> = [];
+		for (var i = 0; i < rows.length; i += 1) {
+			var row: any = rows[i];
+
+			res.push({
+				name: row.name,
+				type: row.type,
+				amount: row.amount
+			});
+		}
+
+		return res;
+	});
+
 	createWindow();
 
 	app.on('activate', () => {
