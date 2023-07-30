@@ -7,7 +7,7 @@ function createWindow() {
 	const win = new BrowserWindow({
 		width: 800,
 		height: 600,
-		//autoHideMenuBar: true,
+		autoHideMenuBar: true,
 		webPreferences: {
 			preload: path.join(__dirname, "preload.js")
 		}
@@ -56,15 +56,15 @@ app.whenReady().then(() => {
 	ipcMain.handle("getBalance", (event) => {
 		try {
 			const stmt = db.prepare("\
-			SELECT (\
+			SELECT IFNULL((\
 				SELECT SUM(amount)\
 				FROM Transactions\
 				WHERE category_id IN (SELECT id FROM Categories WHERE type == 'income')\
-			) - (\
+			), 0) - IFNULL((\
 				SELECT SUM(amount)\
 				FROM Transactions\
 				WHERE category_id IN (SELECT id FROM Categories WHERE type == 'expense')\
-			) AS balance");
+			), 0) AS balance");
 			const row: any = stmt.get();
 
 			if (row !== undefined) {
