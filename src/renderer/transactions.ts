@@ -276,7 +276,7 @@ transactionTable.bootstrapTable({
         field: "category_type",
         title: "Type",
         sortable: true,
-        formatter: capitalizeFirstLetterFormatter
+        formatter: typeBadgeFormatter
     }, {
         field: "amount",
         title: "Amount",

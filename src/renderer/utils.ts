@@ -29,3 +29,18 @@ function capitalizeFirstLetterFormatter(value, row, index, field) {
 function convertToDp(num: number, dp: number) {
     return parseFloat(num).toFixed(dp);
 }
+
+function typeBadgeFormatter(value, row, index, field) {
+    var valueLower: string = value.toLowerCase();
+
+    var color: string;
+    if (valueLower == "income") {
+        color = "info";
+    } else if (valueLower == "expense") {
+        color = "warning";
+    } else {
+        return value;
+    }
+
+    return `<span class="badge text-bg-${color}">${capitalizeFirstLetter(value)}</span>`;
+}

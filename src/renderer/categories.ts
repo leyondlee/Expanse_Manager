@@ -175,7 +175,7 @@ categoryTable.bootstrapTable({
         field: "type",
         title: "Type",
         sortable: true,
-        formatter: capitalizeFirstLetterFormatter
+        formatter: typeBadgeFormatter
     }, {
         field: "actions",
         title: "Actions",
