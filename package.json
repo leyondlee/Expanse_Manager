@@ -4,23 +4,34 @@
   "main": "./dist/main.js",
   "scripts": {
     "prestart": "tsc",
-    "start": "electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
-  "author": "",
+  "author": "Leyond",
   "license": "ISC",
   "devDependencies": {
+    "@electron-forge/cli": "^6.2.1",
+    "@electron-forge/maker-deb": "^6.2.1",
+    "@electron-forge/maker-rpm": "^6.2.1",
+    "@electron-forge/maker-squirrel": "^6.2.1",
+    "@electron-forge/maker-zip": "^6.2.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.2.1",
     "@electron/rebuild": "^3.2.13",
     "@types/better-sqlite3": "^7.6.4",
+    "electron": "^25.3.1",
+    "typescript": "^5.1.6"
+  },
+  "description": "Expense Manager",
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
     "better-sqlite3": "^8.5.0",
     "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.10.5",
     "bootstrap-show-toast": "^1.1.5",
     "bootstrap-table": "^1.22.1",
     "chart.js": "^4.3.2",
-    "electron": "^25.3.1",
     "jquery": "^3.7.0",
-    "moment": "^2.29.4",
-    "typescript": "^5.1.6"
-  },
-  "description": ""
+    "moment": "^2.29.4"
+  }
 }
